@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="js/ajaxfileupload.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $("#shangchuan").click(function(){
+            var file = $("#userPhoto").val();
+            if(file==""){
+                alert("请选择上传的头像");
+                return;
+            }
+            else{
+                //判断上传的文件的格式是否正确
+                var fileType = file.substring(file.lastIndexOf(".")+1);
+                if(fileType!="png"&&fileType!="jpg"){
+                    alert("上传文件格式错误");
+                    return;
+                }
+                else{
+                    var url = "/rest/upload/pic";
+                    $.ajaxFileUpload({
+                        url:url,
+                        secureuri:false,
+                        fileElementId:"userPhoto",        //file的id
+                        dataType:"text",                  //返回数据类型为文本
+                        success:function(data,status){
+                            if(data=="1"){
+                                alert("请上传宽度大于200像素和高度大于200像素的图片");
+                            }
+                            else if(data=="2"){
+                                alert("请上传宽高比不超过2的图片");
+                            }
+                            else if(data=="3"){
+                                alert("请上传文件大小不大于2M的图片");
+                            }
+                            else{
+                                $("#uploadImage").hide();
+                                $("#srcImg").attr("src",data);
+                                $("#previewImg").attr("src",data);
+                                $("#cutImage").show();
+                                $("#bigImage").val(data);
+                                cutImage();         //截取头像
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+    <title>生活管理</title>
+</head>
+<body>
+<form action="" id="imageForm" enctype="multipart/form-data" method="POST">
+    <input type="file" name="userPhoto" id="userPhoto">
+    <input type="button" value="上传" id="shangchuan">
+</form>
+</body>
+</html>
