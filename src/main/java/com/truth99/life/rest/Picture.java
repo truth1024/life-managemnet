@@ -22,15 +22,15 @@ public class Picture {
 
     @GET
     @Path("/get3")
-    @Produces("image/*")
+    @Produces("image/png")
     public File getFile(){
-        File samplePDF = new File("D:\\A\\pic\\IMG_0775.PNG");
+        File samplePDF = new File("D:\\A\\pic\\Tulips.jpg");
         return samplePDF;
     }
 
     @GET
     @Path("/get")
-    @Produces("image/*")
+    @Produces("image/png")
     public InputStream test(){
         String pic_path = "D:\\A\\pic\\LD.png";
         System.out.println(pic_path);
@@ -45,14 +45,14 @@ public class Picture {
 
     @GET
     @Path("/get2")
-    @Produces("image/*")
+    @Produces("image/png")
     public StreamingOutput getFileStreamingOutput() throws Exception{
 
         return new StreamingOutput() {
             @Override
             public void write(OutputStream outputStream) throws IOException,
                     WebApplicationException {
-                FileInputStream inputStream = new FileInputStream("D:\\A\\pic\\image.jpg");
+                FileInputStream inputStream = new FileInputStream("D:\\A\\pic\\DSC00046.jpg");
                 int nextByte = 0;
                 while((nextByte  = inputStream.read()) != -1 ){
                     outputStream.write(nextByte);
