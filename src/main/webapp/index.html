@@ -10,7 +10,7 @@
             $.ajaxFileUpload
             (
                     {
-                        url:'rest/upload/pic',
+                        url:'rest/pic/upload',
                         secureuri:false,
                         fileElementId:'userPhoto',
                         dataType: 'text',
@@ -36,5 +36,8 @@
         <input id="userPhoto" name="userPhoto" type="file" onchange="upload()" title="上传" />
     </span>
 </div>
+<img src="/rest/pic/get" width="400px">
+<img src="/rest/pic/get2" width="400px">
+<img src="/rest/pic/get3" width="400px">
 </body>
 </html>
